@@ -20,10 +20,24 @@ class AppUpdater {
     log.transports.file.level = 'info';
     autoUpdater.logger = log;
     autoUpdater.checkForUpdatesAndNotify();
+    autoUpdater.autoInstallOnAppQuit = false;
+
+    autoUpdater.on('update-downloaded', (info) => {
+      mainWindow.webContents.send('update-downloaded', info);
+    });
   }
 }
 
 let mainWindow: BrowserWindow | null = null;
+
+ipcMain.on('install-update', async () => {
+  await autoUpdater.quitAndInstall();
+});
+
+ipcMain.on('get-app-version', async (event) => {
+  const appVersion = app.getVersion();
+  event.reply('get-app-version', appVersion);
+});
 
 ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;

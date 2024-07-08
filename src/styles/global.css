@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    position: relative;
+    color: white;
+    height: 100vh;
+    background: linear-gradient(
+      200.96deg,
+      #1a1a1a -29.09%,  /* Очень темный серый */
+      #3d3d3d 51.77%,    /* Средний серый */
+      #0a0a0a 129.35%    /* Почти черный */
+    );
+    
+    
+    font-family: sans-serif;
+    overflow-y: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
