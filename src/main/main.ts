@@ -19,6 +19,14 @@ class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
     autoUpdater.logger = log;
+
+    autoUpdater.addAuthHeader('YOUR_ACTUAL_ACCESS_TOKEN');
+    autoUpdater.setFeedURL({
+      provider: 'generic',
+      url: 'http://localhost:5000/api/update',
+      useMultipleRangeRequest: false,
+    });
+
     autoUpdater.checkForUpdatesAndNotify();
     autoUpdater.autoInstallOnAppQuit = false;
 
